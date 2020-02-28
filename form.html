@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Contact Form</title>
+</head>
+<body>
+  <h1>Contact Form</h1>
+  <form>
+    <table>
+      <tr>
+        <td><label for="fname">Your name*:</label></td>
+        <td><input type="text" id="fname" name="fname" required=""></td>
+      </tr>
+      <tr>
+      	<td><label for="email id">E-Mail*:</label></td>
+      	<td><input type="email" id="email" name="email" required=""></td>
+      </tr>
+      <tr>
+      	<td><label for="phn_no">Phone number:</label></td>
+      	<td><input type="tel" id="phn_no" name="phn_no" maxlength="10"></td>
+      </tr>
+      <tr>
+      	<td><label for="website">Website*:</label></td>
+      	<td><input type="url" id="website" name="website" placeholder="http://" size="30" required=""></td>
+      </tr>
+    </table>
+
+    <p>Comments*:</p>
+    <textarea rows="10"; cols="30" required=""></textarea>
+
+    <h3> Text field </h3>
+    <label for="fname">Your name:</label>
+    <input type="text" id="name" name="name"><br>
+
+    <h3>Password</h3>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password"><br>
+
+    <h3>Radio Buttons</h3>
+    <p> Do you like Pizza? </p>
+    <input type="radio" id="yes" name="radio">
+    <label for="yes">Yes</label><br>
+    <input type="radio" id="no" name="radio">
+    <label for="yes">No</label><br>
+    <input type="radio" id="maybe" name="radio">
+    <label for="yes">Maybe</label><br>
+    <input type="radio" id="never_tried" name="radio">
+    <label for="yes">Never Tried</label><br>
+
+    <h3>Check Box</h3>
+    <input type="checkbox" id="box1">
+    <label for="box1">Check this box if you liked our service</label><br>
+
+    <h3>Text Area</h3>
+    <p>Anything you would like to say?</p>
+    <textarea rows="8"; cols="50"></textarea><br>
+
+    <h3>I like</h3>
+    <select id="colors" name="colors" size="5" multiple>
+    <option value="mushrooms">Mushrooms</option>
+    <option value="peppers">Green Peppers</option>
+    <option value="onions">Onions</option>
+    <option value="olives">Olives</option>
+    <option value="tomatoes">Tomatoes</option>
+    </select><br>
+
+    <h3>Menu</h3>
+    <label for="colors">Your favourite color:</label><br>
+    <select id="colors" name="colors">
+    <option value="red">Red</option>
+    <option value="blue">Blue</option>
+    <option value="black">Black</option>
+    <option value="pink">Pink</option>
+    <option value="white">White</option>
+    </select><br>
+    
+    <h3>Attach file</h3>
+    <input type="file" id="myfile" name="myfile" >
+    
+    <h3>Buttons</h3>
+    <input type="submit" value="Submit">
+    <input type="reset">
+
+  </form>
+</body>
+</html>

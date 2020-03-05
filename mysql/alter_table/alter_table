@@ -1,0 +1,11 @@
+CREATE DATABASE db;
+USE db
+CREATE TABLE testing_table(
+  name varchar(30),
+  contact_name varchar(30),
+  roll_no varchar(5)
+);
+ALTER TABLE testing_table DROP COLUMN name;
+ALTER TABLE testing_table CHANGE COLUMN contact_name username varchar(30);
+ALTER TABLE testing_table ADD first_name varchar(20), ADD last_name varchar(20);
+ALTER TABLE testing_table MODIFY roll_no int;

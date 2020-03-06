@@ -1,0 +1,5 @@
+CREATE DATABASE database1;
+sudo mysqldump -u root database1 > database1.sql
+DROP database1;
+CREATE DATABASE restored;
+sudo mysql -u root restored < database1.sql

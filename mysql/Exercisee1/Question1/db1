@@ -1,0 +1,22 @@
+EXERCISE 2: QUESTION 1 
+
+1: SELECT Address 
+   FROM Locations 
+   WHERE LName IN (SELECT Location 
+                   FROM Sandwiches 
+                   WHERE Filling IN (SELECT Filling 
+                                     FROM Tastes 
+                                     WHERE Name="Jones"));
+
+2: SELECT Address 
+   FROM Locations 
+   JOIN Sandwiches 
+   ON Locations.LName=Sandwiches.Location 
+   JOIN Tastes 
+   WHERE Name="Jones" AND Tastes.Filling=Sandwiches.Filling;
+
+3: SELECT LOCATION, COUNT(DISTINCT Name) AS "Number of People" 
+   FROM Tastes 
+   JOIN Sandwiches 
+   WHERE Tastes.Filling=Sandwiches.Filling 
+   GROUP BY Sandwiches.Location;

@@ -1,0 +1,19 @@
+1: SELECT Title 
+   FROM Titles 
+   WHERE Publisher="Macmillan";
+
+2: SELECT DISTINCT Branch 
+   FROM Holdings 
+   WHERE Title IN (SELECT Title 
+                   FROM Titles 
+                   WHERE Author="Ann Brown");
+
+3: SELECT DISTINCT Branch 
+   FROM Holdings 
+   JOIN Titles 
+   ON Holdings.Title=Titles.Title 
+   WHERE Author="Ann Brown";
+
+4: SELECT Branch, SUM(Copies) AS "Total no of books" 
+   FROM Holdings 
+   GROUP BY Branch;

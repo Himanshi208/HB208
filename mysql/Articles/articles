@@ -1,0 +1,34 @@
+2. SELECT Articles.Name 
+   FROM Articles 
+   JOIN Users 
+   ON Articles.User_Id=Users.Id 
+   WHERE Users.Name="UserC";
+
+3. SELECT Articles.Name, Comments.Comments 
+   FROM Articles 
+   JOIN Users 
+   ON Articles.User_Id=Users.Id 
+   JOIN Comments 
+   ON Articles.Name=Comments.Article_Name 
+   WHERE Users.Name="UserC";
+
+4. SELECT Articles.Name 
+   FROM Articles 
+   LEFT JOIN Comments 
+   ON Articles.Name=Comments.Article_Name 
+   WHERE Comments.Comments IS NULL;
+
+5. SELECT Articles.Name 
+   FROM Articles 
+   JOIN Comments 
+   ON Articles.Name=Comments.Article_Name 
+   GROUP BY Comments.Article_Name 
+   ORDER BY COUNT(Comments.Article_Name) DESC 
+   LIMIT 0,1;
+
+6. SELECT Articles.Name     
+   FROM Articles  
+   JOIN Comments     
+   ON Articles.Name=Comments.Article_Name     
+   GROUP BY Comments.Article_Name   
+   Having COUNT(Comments.Article_Name) <= 1;

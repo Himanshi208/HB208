@@ -1,3 +1,64 @@
+CREATE TABLE Users(
+  Id int,
+  Name varchar(20),
+  Type varchar(20)
+  );
+INSERT INTO Users values(1,"UserA","Admin");
+INSERT INTO Users values(2,"UserB","Normal");
+INSERT INTO Users values(3,"UserC","Normal");
+INSERT INTO Users values(4,"UserD","Normal");
+
+CREATE TABLE Articles(
+  User_Id int,
+  Name varchar(40),
+  Category varchar(30)
+  );
+INSERT INTO Articles values(1,"Article1","A");
+INSERT INTO Articles values(1,"Article2","B");
+INSERT INTO Articles values(2,"Article3","B");
+INSERT INTO Articles values(3,"Article4","C");
+INSERT INTO Articles values(3,"Article5","B");
+INSERT INTO Articles values(4,"Article6","A");
+INSERT INTO Articles values(1,"Article7","B");
+
+CREATE TABLE Comments(
+  Article_Name varchar(40), 
+  Comments varchar(100)
+  );
+INSERT INTO Comments values("Article1","How's it");
+INSERT INTO Comments values("Article1","Difficult but helpful");
+INSERT INTO Comments values("Article1","Brief introduction");
+INSERT INTO Comments values("Article4","A walk through");
+INSERT INTO Comments values("Article4","Nice and easy language");
+INSERT INTO Comments values("Article5","Great information");
+INSERT INTO Comments values("Article6","New discovery");
+
+CREATE TABLE Categories(
+  Category varchar(30),
+  Id int
+  );
+INSERT INTO Categories values("A",1);
+INSERT INTO Categories values("B",2);
+INSERT INTO Categories values("C",3);
+
+ALTER TABLE Users 
+ADD PRIMARY KEY (Id);
+
+ALTER TABLE Articles
+ADD PRIMARY KEY (Name);
+
+ALTER TABLE Categories
+ADD PRIMARY KEY (Category);
+
+ALTER TABLE Articles
+ADD FOREIGN KEY (Category) REFERENCES Categories(Category);
+
+ALTER TABLE Articles 
+ADD FOREIGN KEY (User_Id) REFERENCES Users(Id);
+
+ALTER TABLE Comments
+ADD FOREIGN KEY (Article_Name) REFERENCES Articles(Name);
+
 2. SELECT Articles.Name 
    FROM Articles 
    JOIN Users 

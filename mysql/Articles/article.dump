@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.29, for Linux (x86_64)
 --
--- Host: localhost    Database: articles
+-- Host: localhost    Database: article
 -- ------------------------------------------------------
 -- Server version	5.7.29-0ubuntu0.18.04.1
 
@@ -24,9 +24,10 @@ DROP TABLE IF EXISTS `Articles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Articles` (
   `User_Id` int(11) DEFAULT NULL,
+  `Article_Id` int(11) NOT NULL,
   `Name` varchar(40) NOT NULL,
   `Category` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`Name`),
+  PRIMARY KEY (`Article_Id`),
   KEY `Category` (`Category`),
   KEY `User_Id` (`User_Id`),
   CONSTRAINT `Articles_ibfk_1` FOREIGN KEY (`Category`) REFERENCES `Categories` (`Category`),
@@ -40,7 +41,7 @@ CREATE TABLE `Articles` (
 
 LOCK TABLES `Articles` WRITE;
 /*!40000 ALTER TABLE `Articles` DISABLE KEYS */;
-INSERT INTO `Articles` VALUES (1,'Article1','A'),(1,'Article2','B'),(2,'Article3','B'),(3,'Article4','C'),(3,'Article5','B'),(4,'Article6','A'),(1,'Article7','B');
+INSERT INTO `Articles` VALUES (1,1,'Article1','A'),(1,2,'Article2','B'),(2,3,'Article3','B'),(3,4,'Article4','C'),(3,5,'Article5','B'),(4,6,'Article6','A'),(1,7,'Article7','B');
 /*!40000 ALTER TABLE `Articles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,10 +77,11 @@ DROP TABLE IF EXISTS `Comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Comments` (
+  `Article_Id` int(11) DEFAULT NULL,
   `Article_Name` varchar(40) DEFAULT NULL,
   `Comments` varchar(100) DEFAULT NULL,
-  KEY `Article_Name` (`Article_Name`),
-  CONSTRAINT `Comments_ibfk_1` FOREIGN KEY (`Article_Name`) REFERENCES `Articles` (`Name`)
+  KEY `Article_Id` (`Article_Id`),
+  CONSTRAINT `Comments_ibfk_1` FOREIGN KEY (`Article_Id`) REFERENCES `Articles` (`Article_Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -89,7 +91,7 @@ CREATE TABLE `Comments` (
 
 LOCK TABLES `Comments` WRITE;
 /*!40000 ALTER TABLE `Comments` DISABLE KEYS */;
-INSERT INTO `Comments` VALUES ('Article1','How\'s it'),('Article1','Difficult but helpful'),('Article1','Brief introduction'),('Article4','A walk through'),('Article4','Nice and easy language'),('Article5','Great information'),('Article6','New discovery');
+INSERT INTO `Comments` VALUES (1,'Article1','How\'s it'),(1,'Article1','Difficult but helpful'),(1,'Article1','Brief introduction'),(4,'Article4','A walk through'),(4,'Article4','Nice and easy language'),(5,'Article5','Great information'),(6,'Article6','New discovery');
 /*!40000 ALTER TABLE `Comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,4 +129,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-07 17:12:18
+-- Dump completed on 2020-03-10 16:59:14

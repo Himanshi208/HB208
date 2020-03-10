@@ -13,12 +13,13 @@
 3. START TRANSACTION;
      UPDATE accounts 
      JOIN users
-	 ON users.id = accounts.id 
-	 SET accounts.balance = accounts.balance - 200 
-   	 WHERE users.name = "user1";
-	 UPDATE accounts 
-	 JOIN users
-	 ON users.id = accounts.id 
-	 SET accounts.balance = accounts.balance + 200 
-   	 WHERE users.name = "user2";
+     ON users.id = accounts.id 
+     SET accounts.balance = accounts.balance - 200 
+     WHERE users.name = "user1";
+
+     UPDATE accounts 
+     JOIN users
+     ON users.id = accounts.id 
+     SET accounts.balance = accounts.balance + 200 
+     WHERE users.name = "user2";
    COMMIT;

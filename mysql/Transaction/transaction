@@ -1,25 +1,25 @@
 1. UPDATE accounts 
    JOIN users 
-   ON users.id=accounts.id 
+   ON users.account_no=accounts.account_no 
    SET accounts.balance=accounts.balance+1000 
    WHERE users.name="user1";
 
 2. UPDATE accounts 
    JOIN users 
-   ON users.id=accounts.id 
+   ON users.account_no=accounts.account_no
    SET accounts.balance=accounts.balance-500 
    WHERE users.name="user1";
 
 3. START TRANSACTION;
      UPDATE accounts 
      JOIN users
-     ON users.id = accounts.id 
+     ON users.account_no = accounts.account_no
      SET accounts.balance = accounts.balance - 200 
      WHERE users.name = "user1";
 
      UPDATE accounts 
      JOIN users
-     ON users.id = accounts.id 
+     ON users.account_no = accounts.account_no
      SET accounts.balance = accounts.balance + 200 
      WHERE users.name = "user2";
    COMMIT;

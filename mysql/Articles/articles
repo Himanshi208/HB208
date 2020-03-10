@@ -10,28 +10,30 @@ INSERT INTO Users values(4,"UserD","Normal");
 
 CREATE TABLE Articles(
   User_Id int,
+  Article_Id int,
   Name varchar(40),
   Category varchar(30)
   );
-INSERT INTO Articles values(1,"Article1","A");
-INSERT INTO Articles values(1,"Article2","B");
-INSERT INTO Articles values(2,"Article3","B");
-INSERT INTO Articles values(3,"Article4","C");
-INSERT INTO Articles values(3,"Article5","B");
-INSERT INTO Articles values(4,"Article6","A");
-INSERT INTO Articles values(1,"Article7","B");
+INSERT INTO Articles values(1,1,"Article1","A");
+INSERT INTO Articles values(1,2,"Article2","B");
+INSERT INTO Articles values(2,3,"Article3","B");
+INSERT INTO Articles values(3,4,"Article4","C");
+INSERT INTO Articles values(3,5,"Article5","B");
+INSERT INTO Articles values(4,6,"Article6","A");
+INSERT INTO Articles values(1,7,"Article7","B");
 
 CREATE TABLE Comments(
+  Article_Id int,
   Article_Name varchar(40), 
   Comments varchar(100)
   );
-INSERT INTO Comments values("Article1","How's it");
-INSERT INTO Comments values("Article1","Difficult but helpful");
-INSERT INTO Comments values("Article1","Brief introduction");
-INSERT INTO Comments values("Article4","A walk through");
-INSERT INTO Comments values("Article4","Nice and easy language");
-INSERT INTO Comments values("Article5","Great information");
-INSERT INTO Comments values("Article6","New discovery");
+INSERT INTO Comments values(1,"Article1","How's it");
+INSERT INTO Comments values(1,"Article1","Difficult but helpful");
+INSERT INTO Comments values(1,"Article1","Brief introduction");
+INSERT INTO Comments values(4,"Article4","A walk through");
+INSERT INTO Comments values(4,"Article4","Nice and easy language");
+INSERT INTO Comments values(5,"Article5","Great information");
+INSERT INTO Comments values(6,"Article6","New discovery");
 
 CREATE TABLE Categories(
   Category varchar(30),
@@ -45,7 +47,7 @@ ALTER TABLE Users
 ADD PRIMARY KEY (Id);
 
 ALTER TABLE Articles
-ADD PRIMARY KEY (Name);
+ADD PRIMARY KEY (Id);
 
 ALTER TABLE Categories
 ADD PRIMARY KEY (Category);
@@ -57,7 +59,7 @@ ALTER TABLE Articles
 ADD FOREIGN KEY (User_Id) REFERENCES Users(Id);
 
 ALTER TABLE Comments
-ADD FOREIGN KEY (Article_Name) REFERENCES Articles(Name);
+ADD FOREIGN KEY (Article_Id) REFERENCES Articles(Article_Id);
 
 2. SELECT Articles.Name 
    FROM Articles 
@@ -70,26 +72,26 @@ ADD FOREIGN KEY (Article_Name) REFERENCES Articles(Name);
    JOIN Users 
    ON Articles.User_Id=Users.Id 
    JOIN Comments 
-   ON Articles.Name=Comments.Article_Name 
+   ON Articles.Article_Id=Comments.Article_Id 
    WHERE Users.Name="UserC";
 
 4. SELECT Articles.Name 
    FROM Articles 
    LEFT JOIN Comments 
-   ON Articles.Name=Comments.Article_Name 
+   ON Articles.Article_Id=Comments.Article_Id
    WHERE Comments.Comments IS NULL;
 
 5. SELECT Articles.Name 
    FROM Articles 
    JOIN Comments 
-   ON Articles.Name=Comments.Article_Name 
-   GROUP BY Comments.Article_Name 
-   ORDER BY COUNT(Comments.Article_Name) DESC 
+   ON Articles.Article_Id=Comments.Article_Id 
+   GROUP BY Comments.Article_Id 
+   ORDER BY COUNT(Comments.Article_Id) DESC 
    LIMIT 0,1;
 
 6. SELECT Articles.Name     
    FROM Articles  
    JOIN Comments     
-   ON Articles.Name=Comments.Article_Name     
-   GROUP BY Comments.Article_Name   
-   Having COUNT(Comments.Article_Name) <= 1;
+   ON Articles.Article_Id=Comments.Article_Id     
+   GROUP BY Comments.Article_Id   
+   Having COUNT(Comments.Article_Id) <= 1;

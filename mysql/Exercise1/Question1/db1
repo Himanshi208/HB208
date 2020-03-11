@@ -16,7 +16,6 @@ EXERCISE 2: QUESTION 1
    WHERE Name="Jones" AND Tastes.Filling=Sandwiches.Filling;
 
 3: SELECT LOCATION, COUNT(DISTINCT Name) AS "Number of People" 
-   FROM Tastes 
-   JOIN Sandwiches 
-   WHERE Tastes.Filling=Sandwiches.Filling 
-   GROUP BY Sandwiches.Location;
+   FROM Tastes t, Sandwiches s 
+   WHERE t.Filling=s.Filling 
+   GROUP BY Location;

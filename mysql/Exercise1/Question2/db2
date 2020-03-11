@@ -14,6 +14,8 @@
    ON Holdings.Title=Titles.Title 
    WHERE Author="Ann Brown";
 
-4: SELECT Branch, SUM(Copies) AS "Total no of books" 
+4: SELECT Holdings.Branch, SUM(Copies) AS "Total no of books" 
    FROM Holdings 
-   GROUP BY Branch;
+   RIGHT JOIN Branch 
+   ON Branch.BCode=Holdings.Branch 
+   GROUP BY Holdings.Branch;

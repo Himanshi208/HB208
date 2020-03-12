@@ -3,34 +3,42 @@ FROM Employees
 JOIN Departments
 ON Departments.id=Employees.Department_id;
 
-1. SELECT Employees.Name 
-   FROM Employees 
-   JOIN Commissions 
-   ON Employees.id=Commissions.Employee_id  
+1. SELECT Name, SUM(Commission_Amount) AS Total_Commission 
+   FROM Employees JOIN Commissions 
+   ON Employees.id = Commissions.Employee_id 
    GROUP BY Commissions.Employee_id 
-   ORDER BY SUM(Commissions.Commission_Amount) DESC 
-   LIMIT 0,1;
+   HAVING Total_Commission = (SELECT SUM(Commission_Amount) AS Total_Commission 
+                              FROM Employees 
+                              JOIN Commissions 
+                              ON Employees.id = Commissions.Employee_id
+                              GROUP BY Commissions.Employee_id
+                              ORDER BY total_commission DESC 
+                              LIMIT 1);
 
 2. SELECT Name 
    From Employees 
    ORDER BY salary DESC 
    LIMIT 3,1;
 
-3. SELECT Departments.Name 
-   FROM Departments 
-   JOIN Employees 
-   ON Departments.id=Employees.Department_id 
-   JOIN Commissions 
-   ON Employees.id=Commissions.Employee_id 
-   GROUP BY Employees.Department_id 
-   ORDER BY SUM(Commissions.Commission_Amount) DESC 
-   LIMIT 0,1;
+3. SELECT d.Name, SUM(Commission_Amount) AS Total_Commission
+   FROM Departments AS d 
+   JOIN Employees AS e 
+   JOIN Commissions AS c
+   ON e.id = c.Employee_id AND d.id = e.Department_id
+   GROUP BY d.id
+   HAVING Total_Commission = (SELECT SUM(Commission_Amount) AS Total_Commission
+                              FROM Employees AS e 
+                              JOIN Commissions AS c
+                              ON e.id = c.Employee_id
+                              GROUP BY e.Department_id
+                              ORDER BY total_commission DESC
+                              LIMIT 1);
 
-4. SELECT Employees.Name, SUM(Commissions.Commission_Amount) 
+4. SELECT group_concat(Name) AS Employees, Commission_Amount 
    FROM Employees 
-   JOIN Commissions 
-   ON Employees.id=Commissions.Employee_id  
-   WHERE Commissions.Commission_Amount>3000 
-   GROUP BY Commissions.Employee_id 
-   ORDER BY SUM(Commissions.Commission_Amount) DESC;
+   LEFT JOIN Commissions
+   ON Commissions.Employee_id = Employees.id
+   GROUP BY Commission_Amount
+   HAVING Commission_Amount > 3000;
+
 

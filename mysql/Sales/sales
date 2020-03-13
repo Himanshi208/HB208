@@ -1,0 +1,46 @@
+1. SELECT salesperson.id,salesperson.name, age, salary 
+   FROM salesperson 
+   JOIN orders 
+   JOIN customer  
+   ON orders.salesperson_id=salesperson.id  AND orders.cust_id=customer.id 
+   WHERE customer.name="Samsonic";
+
+2. SELECT salesperson.id,salesperson.name, age, salary 
+   FROM salesperson 
+   JOIN orders 
+   ON salesperson.id=orders.salesperson_id 
+   GROUP BY orders.salesperson_id 
+   HAVING COUNT(cust_id)>=2;
+
+3. SELECT salesperson.name, orders.id, orders.order_date, orders.cust_id, orders.amount
+   FROM salesperson 
+   LEFT JOIN orders
+   ON salesperson.id = orders.salesperson_id
+   GROUP BY name
+   HAVING (DATEDIFF(CURDATE(), order_date) > 15) OR orders.id IS NULL
+   ORDER BY order_date DESC;
+
+4. SELECT name, SUM(amount) AS total_order_amount
+   FROM salesperson 
+   JOIN orders 
+   ON salesperson.id = orders.salesperson_id
+   GROUP BY salesperson.name
+   HAVING total_order_amount = (SELECT SUM(amount) AS total_order_amount
+                                FROM orders
+                                GROUP BY salesperson_id
+                                ORDER BY total_order_amount DESC
+                                LIMIT 1);
+
+5. SELECT salesperson.name, GROUP_CONCAT(DISTINCT industry_type) AS Industries
+   FROM salesperson 
+   JOIN orders
+   JOIN customer
+   ON salesperson.id = orders.salesperson_id AND orders.cust_id = customer.id
+   GROUP BY salesperson.name;
+
+6. SELECT salesperson.name, SUM(amount) as total_amount    
+   FROM salesperson     
+   JOIN orders    
+   JOIN customer    
+   ON salesperson.id = orders.salesperson_id AND orders.cust_id = customer.id    
+   GROUP BY salesperson.name;  

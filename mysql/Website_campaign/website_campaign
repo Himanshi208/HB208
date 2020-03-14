@@ -1,0 +1,38 @@
+CREATE TABLE email_subscribers(
+  email varchar(50),
+  phone_no int,
+  city varchar(20)
+  );
+
+LOAD DATA LOCAL INFILE '/home/vinsol/Downloads/email_subscribers.txt' 
+INTO TABLE email_subscribers 
+COLUMNS TERMINATED BY ',' 
+LINES TERMINATED BY '\n';
+
+1. SELECT DISTINCT city 
+   FROM email_subscribers;
+
+2. SELECT city, COUNT(city) AS no_of_people
+   FROM email_subscribers
+   GROUP BY city;
+
+3. SELECT city 
+   FROM email_subscribers 
+   GROUP BY city 
+   HAVING COUNT(city)=(SELECT COUNT(city) 
+                       FROM email_subscribers 
+                       GROUP BY city 
+                       ORDER BY COUNT(city) DESC 
+                       LIMIT 1);
+
+4. SELECT DISTINCT (SUBSTRING_INDEX(SUBSTR(email, INSTR(email, '@') + 1),'.',1)) AS email_domains 
+   FROM email_subscribers;
+
+5. SELECT (SUBSTRING_INDEX(SUBSTR(email, INSTR(email, '@') + 1),'.',1)) AS email_domains 
+   FROM email_subscribers 
+   GROUP BY(email_domains) 
+   HAVING COUNT(email_domains)=(SELECT COUNT(email_domains) 
+                                FROM email_subscribers 
+                                GROUP BY (SUBSTRING_INDEX(SUBSTR(email, INSTR(email, '@') + 1),'.',1)) 
+                                ORDER BY COUNT(email_domains) 
+                                DESC LIMIT 1);

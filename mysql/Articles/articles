@@ -50,60 +50,6 @@ ALTER TABLE Articles
 ADD PRIMARY KEY (Id);
 
 ALTER TABLE Categories
-CREATE TABLE Users(
-  Id int,
-  Name varchar(20),
-  Type varchar(20)
-  );
-INSERT INTO Users values(1,"UserA","Admin");
-INSERT INTO Users values(2,"UserB","Normal");
-INSERT INTO Users values(3,"UserC","Normal");
-INSERT INTO Users values(4,"UserD","Normal");
-INSERT INTO Users values(5,"UserE","Admin");
-
-CREATE TABLE Articles(
-  User_Id int,
-  Article_Id int,
-  Name varchar(40),
-  Category varchar(30)
-  );
-INSERT INTO Articles values(1,1,"Article1","A");
-INSERT INTO Articles values(1,2,"Article2","B");
-INSERT INTO Articles values(2,3,"Article3","B");
-INSERT INTO Articles values(3,4,"Article4","C");
-INSERT INTO Articles values(3,5,"Article5","B");
-INSERT INTO Articles values(4,6,"Article6","A");
-INSERT INTO Articles values(1,7,"Article7","B");
-INSERT INTO Articles values(5,8,"Article8","C");
-
-CREATE TABLE Comments(
-  Article_Id int,
-  Article_Name varchar(40), 
-  Comments varchar(100)
-  );
-INSERT INTO Comments values(1,"Article1","How's it");
-INSERT INTO Comments values(1,"Article1","Difficult but helpful");
-INSERT INTO Comments values(1,"Article1","Brief introduction");
-INSERT INTO Comments values(4,"Article4","A walk through");
-INSERT INTO Comments values(4,"Article4","Nice and easy language");
-INSERT INTO Comments values(5,"Article5","Great information");
-INSERT INTO Comments values(6,"Article6","New discovery");
-
-CREATE TABLE Categories(
-  Category varchar(30),
-  Id int
-  );
-INSERT INTO Categories values("A",1);
-INSERT INTO Categories values("B",2);
-INSERT INTO Categories values("C",3);
-
-ALTER TABLE Users 
-ADD PRIMARY KEY (Id);
-
-ALTER TABLE Articles
-ADD PRIMARY KEY (Id);
-
-ALTER TABLE Categories
 ADD PRIMARY KEY (Category);
 
 ALTER TABLE Articles
@@ -144,11 +90,26 @@ UPDATE Comments SET Comments="Great Discovery" WHERE Article_Name="Article6";
    ON Articles.Article_Id=Comments.Article_Id 
    WHERE Users.Name="UserC";
 
+   USING SUBQUERY
+
+   SELECT Comments, Name 
+   FROM Comments, Articles 
+   WHERE Articles.User_Id=(SELECT Id 
+                           FROM Users 
+                           WHERE Users.Name="UserC") AND Articles.Article_Id=Comments.Article_Id;
+
 4. SELECT Articles.Name 
    FROM Articles 
    LEFT JOIN Comments 
    ON Articles.Article_Id=Comments.Article_Id
    WHERE Comments.Comments IS NULL;
+
+   USING SUBQUERY
+   
+   SELECT Name 
+   FROM Articles 
+   WHERE Article_Id NOT IN (SELECT Article_Id 
+                            FROM Comments);
 
 5. SELECT Articles.Name 
    FROM Articles 

@@ -25,14 +25,14 @@ LINES TERMINATED BY '\n';
                        ORDER BY COUNT(city) DESC 
                        LIMIT 1);
 
-4. SELECT DISTINCT (SUBSTRING_INDEX(SUBSTR(email, INSTR(email, '@') + 1),'.',1)) AS email_domains 
+4. SELECT DISTINCT substring_index(email,'@',-1) 
    FROM email_subscribers;
 
-5. SELECT (SUBSTRING_INDEX(SUBSTR(email, INSTR(email, '@') + 1),'.',1)) AS email_domains 
+5. SELECT substring_index(email,'@',-1) AS email_domains 
    FROM email_subscribers 
    GROUP BY(email_domains) 
    HAVING COUNT(email_domains)=(SELECT COUNT(email_domains) 
                                 FROM email_subscribers 
-                                GROUP BY (SUBSTRING_INDEX(SUBSTR(email, INSTR(email, '@') + 1),'.',1)) 
+                                GROUP BY substring_index(email,'@',-1) 
                                 ORDER BY COUNT(email_domains) 
                                 DESC LIMIT 1);

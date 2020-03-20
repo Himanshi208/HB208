@@ -1,0 +1,48 @@
+1. SELECT employees.name 
+   FROM employees 
+   JOIN personal_assigned_assets 
+   ON employees.id=personal_assigned_assets.emp_id 
+   GROUP BY emp_id 
+   ORDER BY COUNT(*) DESC 
+   LIMIT 1;
+
+2. SELECT employees.name 
+   FROM employees JOIN personal_assigned_assets 
+   ON employees.id=personal_assigned_assets.emp_id 
+   WHERE to_date IS NULL 
+   GROUP BY emp_id 
+   ORDER BY COUNT(*) DESC 
+   LIMIT 1;
+
+3. SELECT employees.name, from_date, to_date  
+   FROM employees 
+   JOIN personal_assigned_assets 
+   ON employees.id=personal_assigned_assets.emp_id 
+   JOIN assets 
+   ON assets.id=personal_assigned_assets.asset_id 
+   WHERE assets.name="Laptop A";
+
+4. SELECT name 
+   FROM assets 
+   WHERE id NOT IN (SELECT asset_id 
+                    FROM personal_assigned_assets 
+                    UNION ALL 
+                    SELECT asset_id 
+                    FROM public_assigned_assets);
+
+5. SELECT assets.name 
+   FROM assets 
+   JOIN personal_assigned_assets 
+   ON assets.id=personal_assigned_assets.asset_id 
+   JOIN employees ON employees.id=personal_assigned_assets.emp_id 
+   WHERE employees.name="BOB" AND to_date IS NULL;
+
+6. SELECT name 
+   FROM assets 
+   WHERE CURDATE() > DATE_ADD(year,INTERVAL warranty MONTH);
+
+7. SELECT name 
+   FROM employees 
+   LEFT JOIN personal_assigned_assets 
+   ON employees.id=personal_assigned_assets.emp_id 
+   WHERE from_date IS NULL;

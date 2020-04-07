@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="moveCountries.css">
+</head>
+<body>
+  <div id="container">
+    <div id="leftbox">
+      <select id="select_from" size="5" multiple>
+        <option>Denmark</option>
+        <option>Dominican Republican</option>
+        <option>Dijbouti</option>
+        <option>Dominica</option>
+        <option>East Timor</option>
+      </select>
+    </div>
+    <button id="add" value="Add" class="buttons">Add</button>
+    <button id="remove" value="Remove" class="buttons">Remove</button>
+    <div id="rightbox">
+      <select id="select_to" size="5" multiple>
+      </select>
+    </div>
+  </div>
+  <script>
+    class OptionMover
+    {
+      constructor(options)
+      {
+        this.select_from = options.select_from;
+        this.select_to = options.select_to;
+        this.addButton = options.addButton;
+        this.removeButton = options.removeButton;
+      }
+
+      init()
+      {
+        this.addButton.addEventListener("click", () => {this.moveOption( this.select_from, this.select_to)} );
+        this.removeButton.addEventListener("click", () => {this.moveOption( this.select_to, this.select_from)} );
+      }
+
+      moveOption(source, destination)
+      {
+        var countries = [];
+        countries = source.selectedOptions;
+        [...countries].forEach(addRemove);
+        
+        function addRemove(item)
+        {
+          destination.add(item);
+        } 
+      }
+    }
+    
+    window.onload = function() {
+      var options = {
+      select_from : document.getElementById("select_from"),
+      select_to : document.getElementById("select_to"),
+      addButton : container.querySelector("#add"),
+      removeButton : container.querySelector("#remove")
+      };
+      let optionMover = new OptionMover(options);
+      optionMover.init();
+    };
+  </script>
+</body>
+</html>

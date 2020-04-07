@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Name Prompt</h2>
+
+<script>
+  class UserInput{
+    
+    init()
+    {
+      this.fname = this.getfname();
+      if(this.fname == undefined)
+      {
+          return;
+      }
+      this.lname = this.getlname();
+      if (this.lname == undefined)
+      {
+        return;
+      }
+      this.createAlert();
+      this.displayResult();
+    }
+    
+    
+    getfname()
+    {
+      var fname = prompt("Enter First Name","");
+      if(fname === null)
+      {
+        alert("no input by user");
+      }
+      else
+      {
+        fname = fname.trim();
+        if(this.ifEmpty(fname))
+        {
+          alert("First name cannot be empty");
+          fname = this.getfname();
+        }
+        return fname;
+      }
+    }
+    
+    getlname()
+    {
+      var lname = prompt("Enter Last Name","");
+      if(lname === null)
+      {
+        alert("no input by user");
+      }
+      else
+      {
+        lname = lname.trim();
+        if(this.ifEmpty(lname))
+        {
+          alert("Last name cannot be empty");
+          lname = this.getlname();
+        }
+        return lname;
+      }
+    }
+
+    ifEmpty(name)
+    {
+      if(name == null || name == "")
+      {
+        return true;
+      }
+      return false;
+    }
+
+    createAlert()
+    {
+      alert(`Hello ${this.fname} ${this.lname}`);
+    }
+
+    displayResult()
+    {
+      var txt = "Hello " + this.fname + " " + this.lname;
+      document.write(txt);
+    }
+
+  }
+  
+  window.onload = function()
+    {
+      let name = new UserInput();
+      name.init();
+    }
+</script>
+</body>
+</html>

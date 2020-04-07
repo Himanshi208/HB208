@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check if Numerical</title>
+</head>
+<body>
+    <h2>Number Matching</h2>
+    <form class="myForm">
+      <label class="label" for="number">Enter number:</label>
+      <input class="input" type="text" id="number" name="number"><br><br>
+
+      <label class="label" for="result">Result:</label>
+      <input class="input" type="result" id="result" name="result"><br><br>
+
+      <input class="submit" type="submit" id="submit" value="Submit"> 
+
+    </form> 
+  <script>
+    class NumberChecker
+    {
+      constructor(options)
+      {
+        this.numberFeild = options.numberFeild;
+        this.resultFeild = options.resultFeild;
+        this.submit = options.submit;
+        this.form = options.form;
+      }
+
+      init()
+      {
+        this.form.addEventListener("submit", (e) => {this.validate(e)} );
+      }
+
+      validate = (event) => {
+        var status = this.validateNumber();
+        this.resultFeild.value = status;
+        if(!status) 
+        {
+          event.preventDefault();
+        }
+      } 
+
+      validateNumber()
+      {
+        var pattern = /^[0-9]+$/;
+        return pattern.test(this.numberFeild.value);
+      }
+
+    }
+    window.onload = function()
+    {
+      var form = document.getElementsByClassName("myForm")[0];
+      var options ={
+        form : form,
+        numberFeild : form.querySelector("#number"),
+        resultFeild : form.querySelector("#result"),
+        submit : form.querySelector("#submit")
+      };
+      let numberChecker = new NumberChecker(options);
+      numberChecker.init();
+    }
+  </script>
+</body>
+</html>

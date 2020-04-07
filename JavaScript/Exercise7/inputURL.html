@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Input URL</h2>
+
+<script>
+  class URLInput
+  {
+    openURL()
+    {
+      var url = prompt("enter url").trim();
+      if (url == null || url == "")
+      {
+        alert("No URL entered");
+        url = this.openURL();
+      }
+      if(this.validURL(url) === true)
+      { 
+        window.open(url,'url','height=450,width=400,location=no,scrollbars=no,menubar=no,status=no,titlebar=no,toolbar=no');
+      }
+      else
+      {
+        alert("Invalid URL");
+      }
+    }
+
+    validURL(myURL)
+    {
+      var pattern = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+      return (pattern.test(myURL));
+    }
+  }
+
+  
+  window.onload = function()
+    {
+      let address = new URLInput();
+      address.openURL();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Age Comparison</h1>
+<p id="demo1" style="font-size: 18px"></p>
+
+<script>
+  class User
+  {
+  	constructor(name,age)
+  	{
+  	  this.name=name;
+  	  this.age=age;
+    }
+    compare(user2)
+    {
+      if (this.age > user2.age)
+      {  
+        return (`${this.name} is older than ${user2.name}`);
+      }
+      else if (user2.age > this.age)
+      {
+        return (`${user2.name} is older than ${this.name}`);
+      }
+      else
+      {
+        return (`Both ${this.name} and ${user2.name} are of same age`);
+      }
+    }
+  }
+user1 = new User("John",35);
+user2 = new User("Mary",30);
+document.getElementById("demo1").innerHTML = user1.compare(user2);
+</script>
+
+</body>
+</html>

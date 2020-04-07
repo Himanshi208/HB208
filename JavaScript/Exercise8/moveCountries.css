@@ -1,0 +1,43 @@
+#leftbox 
+{
+  float: left;
+  /* bottom: 62px; */
+}
+
+#rightbox
+{
+  float: right;
+  position: relative;
+  bottom: 67px;
+}
+  
+#select_from 
+{
+  width: 200px;
+  border: solid 2px grey ;
+}
+  
+#select_to 
+{
+  width: 200px;
+  border: solid 2px grey;
+}
+  
+#container 
+{
+  width: 600px;
+}
+  
+.buttons 
+{
+  border: 2px solid orange;
+  width: 80px;
+  display: inherit;
+  border-radius: 5px;
+  background: orange;
+  position: relative; 
+  left: 50px;
+  margin-top: 20px;
+  font-size: 16px;
+}
+  

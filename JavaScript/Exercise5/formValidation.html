@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <link rel="stylesheet" type="text/css" href="formValidation.css" media="screen"/>
+</head>
+<body>
+  <div class="class3">
+      <h3 id= "heading">Registration Form</h3>
+      <br>
+    <form class="myForm">
+      <label class="label" for="loginId">Login Id:</label>
+      <input class="input" type="text" id="login" name="login"><br><br>
+
+      <label class="label" for="email id">E-Mail:</label>
+      <input class="input" type="email" id="email" name="email"><br><br>
+
+      <label class="label" for="name">Name:</label>
+      <input class="input" type="text" id="name" name="name"><br><br>
+
+      <label class="label" for="timezone">TimeZone:</label>
+      <select class="input" id="timezone" name="timezone">
+      <option value="GMT">GMT</option>
+      <option value="UTC">UTC</option>
+      </select><br><br>
+
+      <label class="label" for="homepage">Homepage:</label>
+      <input class="input" type="url" id="homepage" name="homepage"><br><br>
+
+      <label class="label" for="aboutMe">About Me:</label><br>
+      <textarea class="input conditional_input" type="text" id="aboutMe" name="aboutMe" style="height: 135px; width: 100%"></textarea><br><br>
+
+      <input type="checkbox" id="box">
+      <label for="box"><b>Receive notifications of comments.</b></label>
+
+      <p style="font-size: 12px;">You will be send an email when someone post comments to your Blog or Album</p>
+      <p align = "center"> Your password will be mailed to you.</p>
+
+      <input class="submit" type="submit" id="submit" value="GO"> 
+
+    </form> 
+  </div>
+  <script>
+    class Validate
+    {
+      constructor(inputArguments)
+      {
+        this.form = inputArguments.form;
+        this.requiredElements = inputArguments.requiredElements;
+        this.conditional_input = inputArguments.conditional_input;
+        this.confirmNotification = inputArguments.confirmNotification;
+        this.limit = inputArguments.limit;
+      }
+
+      init()
+      {
+        this.form.addEventListener("submit", ()  => {this.validate()});
+      }
+
+      validate = (event) => {
+        this.checkIfEmpty();
+        this.checkRange();
+        this.confirmNotifications(this.confirmNotification);
+      } 
+      
+      checkIfEmpty() 
+      {
+        for( var i = 0; i < this.requiredElements.length; i++)
+        {
+          if (this.requiredElements[i].value === "" || !this.requiredElements[i].value.trim())
+          {
+            alert(this.requiredElements[i].name+" cannot be empty");
+            event.preventDefault();
+            break;
+          }
+        }
+      } 
+
+      checkRange()
+      {
+        if (this.conditional_input[0].value.length < this.limit) 
+        {
+          alert("Minimum 50 characters required for About Me");
+          event.preventDefault();
+        } 
+      }
+
+      confirmNotifications(checkbox)
+      {
+        if(checkbox.checked === true)
+        {
+          confirm("Are u sure u want to receive notification?");
+        }
+        //event.preventDefault();
+      }
+
+    }
+
+    window.onload = function() {
+    var _form = document.getElementsByClassName("myForm")[0];
+    var inputArguments = {
+      form : _form,
+      requiredElements : _form.querySelectorAll(".input"),
+      conditional_input : _form.querySelectorAll("#aboutMe"),
+      limit : 50,
+      confirmNotification : _form.querySelector("#box")
+    };
+    var validate = new Validate(inputArguments);
+    validate.init();
+    };
+
+  </script>
+</body>
+</html>

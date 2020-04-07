@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <link rel="stylesheet" type="text/css" href="formValidation.css" media="screen"/>
+</head>
+<body>
+  <div class="class3">
+      <h3 id= "heading">Registration Form</h3>
+      <br>
+    <form class="myForm">
+      <label class="label" for="loginId">Login Id:</label>
+      <input class="input" type="text" id="login" name="login"><br><br>
+
+      <label class="label" for="email id">E-Mail:</label>
+      <input class="input" type="text" id="email" name="email"><br><br>
+
+      <label class="label" for="name">Name:</label>
+      <input class="input" type="text" id="name" name="name"><br><br>
+
+      <label class="label" for="timezone">TimeZone:</label>
+      <select class="input" id="timezone" name="timezone">
+      <option value="GMT">GMT</option>
+      <option value="UTC">UTC</option>
+      </select><br><br>
+
+      <label class="label" for="homepage">Homepage:</label>
+      <input class="input" type="text" id="homepage" name="homepage"><br><br>
+
+      <label class="label" for="aboutMe">About Me:</label><br>
+      <textarea class="input conditional_input" type="text" id="aboutMe" name="aboutMe" style="height: 135px; width: 100%"></textarea><br><br>
+
+      <input type="checkbox" id="box">
+      <label for="box"><b>Receive notifications of comments.</b></label>
+
+      <p style="font-size: 12px;">You will be send an email when someone post comments to your Blog or Album</p>
+      <p align = "center"> Your password will be mailed to you.</p>
+
+      <input class="submit" type="submit" id="submit" value="GO"> 
+
+    </form> 
+  </div>
+  <script>
+    class Validate
+    {
+      constructor(inputArguments)
+      {
+        this.form = inputArguments.form;
+        this.homepage = inputArguments.homepage;
+        this.email = inputArguments.email;
+      }
+
+      init()
+      {
+        this.form.addEventListener("submit", ()  => {this.validate()});
+      }
+
+      validate = (event) => {
+        this.validateURL();
+        this.validateEmail();
+      } 
+      
+      validateURL()
+      {
+        var pattern = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+        if(pattern.test(this.homepage[0].value) === false)
+        {
+          alert("Enter valid URL");
+          event.preventDefault();
+        }
+      }
+
+      validateEmail()
+      {
+        var pattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        if (pattern.test(this.email[0].value) === false)
+        {
+          alert("Enter valid Email Id");
+          event.preventDefault();
+        }
+      }
+
+    }
+
+    window.onload = function() {
+    var _form = document.getElementsByClassName("myForm")[0];
+    var inputArguments = {
+      form : _form,
+      homepage : _form.querySelectorAll("#homepage"),
+      email : _form.querySelectorAll("#email"),
+    };
+    var validate = new Validate(inputArguments);
+    validate.init();
+    };
+
+  </script>
+</body>
+</html>

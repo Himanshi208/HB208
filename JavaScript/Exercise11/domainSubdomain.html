@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Domain SubDomain</title>
+</head>
+<body>
+    <h2>Find Domain and Subdomain</h2>
+    <form class="myForm">
+      <label class="url" for="url">Enter URL:</label>
+      <input class="input" type="text" id="url" name="url"><br><br>
+
+      <input class="submit" type="submit" id="submit" value="Submit"> 
+
+    </form> 
+  <script>
+    class DomainSubDomain
+    {
+      constructor(options)
+      {
+        this.url = options.url;
+        this.submit = options.submit;
+      }
+
+      init()
+      {
+        this.submit.addEventListener("click", ()  => {this.findDomainSubDomain()});
+      }
+
+      findDomainSubDomain = () => {
+        this.validateURL();
+      }
+
+      validateURL()
+      {
+        this.pattern = /^(?:(?:https?|ftp|file)\:\/\/)?(?:www\.)?(?:([\w\.-]+)\.)?(\w+\.[a-z]{2,4})(?:(?:[\/\w \.-]*)*\/?)?$/i;
+        console.log(this.url.value);
+        if(this.pattern.test(this.url.value) === false)
+        {
+          alert("Enter valid URL");
+          event.preventDefault();
+        }
+        else
+        {
+          this.showDomainSubDomain(RegExp.$2,RegExp.$1)
+        }
+      }
+
+      showDomainSubDomain(domain, subDomain)
+      {
+        var domainString = "Domain: " + domain;
+        var subDomainString = "SubDomain: " + subDomain;
+        if(subDomain.length == 0)
+        {
+          alert(domainString);
+        }
+        else
+        {
+          alert(domainString)
+          alert(subDomainString);
+        }
+      }
+    }
+    window.onload = function() 
+    {
+      var form = document.getElementsByClassName("myForm")[0];
+      var options = {
+        url : form.querySelector("#url"),
+        submit : form.querySelector("#submit"),
+      };
+      var findMatch = new DomainSubDomain(options);
+      findMatch.init();
+    };
+  </script>
+</body>
+</html>

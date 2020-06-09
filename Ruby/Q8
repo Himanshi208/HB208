@@ -1,0 +1,58 @@
+Question: Define a method power() for an array. It takes an argument 'x' and returns the array with elements raised to power 'x'. Try to make use of array functions.
+
+Your program should accept an array and the value of power from command line. 
+input example: ruby power_array.rb "[1,2,3,4]" 2 
+output example: [1, 4, 9, 16]
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input 
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+"[1,2,3,4,5,6]" 3
+[/input]
+[output]
+[1, 8, 27, 64, 125, 216] 
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+"[-1,0,2,4,10]" 2
+[/input]
+[output]
+[1, 0, 4, 16, 100]
+[/output]
+
+Solution:
+
+# Your Ruby code here
+class Array
+  def power!(number)
+    map! { |num| num.to_i**number }
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  str = ARGV[0]
+  number = ARGV[1]
+  array = str[1...-1].split(',').to_a
+  array.power!(number.to_i)
+  p array
+end

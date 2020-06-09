@@ -1,0 +1,63 @@
+Question: Use string methods to reverse the words arrangement in a sentence.
+Eg: "An apple a day keeps the doctor away" -> "away doctor the keeps day a apple An"
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input 
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+"An apple a day keeps the doctor away"
+[/input]
+[output]
+"away doctor the keeps day a apple An" 
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+"away doctor the keeps day a apple An" 
+[/input]
+[output]
+"An apple a day keeps the doctor away"
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+"Hello everyone! Good morning" 
+[/input]
+[output]
+"morning Good everyone! Hello" 
+[/output]
+
+Answer:
+
+# Your Ruby code here
+class String
+  def reverse_sentence
+    split(" ").reverse.join(" ")
+  end
+end
+if ARGV[0].nil?
+  puts "Please provide an input"
+else
+  puts "\"#{ARGV[0].reverse_sentence}\""
+end

@@ -1,0 +1,94 @@
+Question: Write a program to print a Fibonacci series. Your program should accept a number input and output the Febonacci series.
+Make use of yield in your program
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+1000
+[/input]
+[output]
+1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+150
+[/input]
+[output]
+1 1 2 3 5 8 13 21 34 55 89 144 
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+1
+[/input]
+[output]
+1 1
+[/output]
+
+===
+
+
+[name]
+5
+[/name]
+[input]
+2
+[/input]
+[output]
+1 1 2
+[/output]
+
+===
+
+[name]
+6
+[/name]
+[input]
+3
+[/input]
+[output]
+1 1 2 3
+[/output]
+
+
+Solution:
+
+# Your Ruby code here
+class Integer
+  def fibonacci
+    number1 = 0
+    number2 = 1
+    while number2 <= self
+      yield number2
+      number1, number2 = number2, number1+number2
+    end
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  ARGV[0].to_i.fibonacci { |num| print "#{num} " }
+end

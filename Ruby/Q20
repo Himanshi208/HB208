@@ -1,0 +1,85 @@
+Question: Create a class 'Name' with two attributes firstname and lastname. Neither of them can be blank and the first letter of firstname must be capital. Implement using 'raise'.
+
+Try using custom Exceptions.
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+manoj sharma
+[/input]
+[output]
+Firstname must start with uppercase letter
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+Sachin
+[/input]
+[output]
+Lastname cannot be blank
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+"Rakesh" "kumar"
+[/input]
+[output]
+Your name is Rakesh kumar 
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+Manoj Sharma
+[/input]
+[output]
+Your name is Manoj Sharma 
+[/output]
+
+Solution:
+
+# Your Ruby code here
+class LastNameError < StandardError
+  def initialize(msg = 'Lastname cannot be blank')
+    super
+  end
+end
+
+class FirstNameError < StandardError
+  def initialize(msg = 'Firstname must start with uppercase letter')
+    super
+  end
+end
+
+class Name
+  attr_accessor :firstname, :lastname
+  def initialize(firstname, lastname)
+    raise LastNameError if lastname.nil?
+    raise FirstNameError if firstname[0] =~ /[a-z]/
+    @firstname = firstname
+    @lastname = lastname
+  end
+end
+
+begin
+  name = Name.new(ARGV[0], ARGV[1])
+  puts "Your name is #{name.firstname} #{name.lastname}"
+rescue LastNameError => e
+  puts e.message
+rescue FirstNameError => e
+  puts e.message
+end

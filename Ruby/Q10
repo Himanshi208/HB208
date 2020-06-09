@@ -1,0 +1,85 @@
+Question: Write a method that groups the above hash into 2 groups of 'even' and 'odd' length using 'inject'.
+Your ruby script should accept an array as command line argument and output the processed hash
+Eg: ['abc','def',1234,234,'abcd','x','mnop',5,'zZzZ'] -> {odd: [["x", 5], ["abc", "def", 234]], even: [[1234, "abcd", "mnop", "zZzZ"]]}
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input 
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+"['abc','def',1234,234,'abcd','x','mnop',5,'zZzZ']"
+[/input]
+[output]
+{"odd"=>[["abc", "def", "234"], ["x", "5"]], "even"=>[["1234", "abcd", "mnop", "zZzZ"]]} 
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+"['hello','world',1,2,3,'good','bye']"
+[/input]
+[output]
+{"odd"=>[["hello", "world"], ["1", "2", "3"], ["bye"]], "even"=>[["good"]]} 
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+"['hello','world',1,2,3,'bye']"
+[/input]
+[output]
+{"odd"=>[["hello", "world"], ["1", "2", "3"], ["bye"]]} 
+[/output]
+
+
+Solution:  
+
+# Your Ruby code here
+class Array
+  def group_by_length
+    hash_array = Hash.new { |hash, key| hash[key] = [] }
+    each do |element|
+      len = element.length
+      hash_array[len].push(element)
+    end
+    hash_array
+  end
+
+  def group_by_even_odd
+    hash_array = group_by_length
+    hash_of_array = Hash.new { |hash, key| hash[key] = [] }
+    hash_array.keys.inject(hash_of_array) do |_array, num|
+      if num.even?
+        hash_of_array['even'].push(hash_array[num])
+      else
+        hash_of_array['odd'].push(hash_array[num])
+      end
+    end
+    hash_of_array
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  str = ARGV[0]
+  str1 = str.delete "''"
+  puts str1[1...-1].split(',').group_by_even_odd
+end

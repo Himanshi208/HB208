@@ -1,0 +1,91 @@
+Question: Print Pascal's triangle using 'yield'.
+Eg: pascal(6) gives:
+1 
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+0
+[/input]
+[output]
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+2
+[/input]
+[output]
+1 
+1 1 
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+8
+[/input]
+[output]
+1 
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+1 6 15 20 15 6 1 
+1 7 21 35 35 21 7 1 
+[/output]
+
+Solution:
+
+# Your Ruby code here
+class Integer
+  def self.pascal(number)
+    (0...number).each do |i|
+      (0..i).each do |j|
+        yield "#{binomial(i, j)} "
+      end
+      print "\n"
+    end
+  end
+
+  def self.fact(n)
+    return 1 if n == 0
+    (1..n).reduce(:*)
+  end
+
+  def self.binomial(n, k)
+    return 1 if n - k <= 0 || k <= 0
+    fact(n) / (fact(k) * fact(n - k))
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  Integer.pascal(ARGV[0].to_i) { |n| print n }
+end

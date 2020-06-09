@@ -1,3 +1,10 @@
+Question: Take back up of the db you created for practice/exercise and send it to me.
+
+Now create a new database named "restored" and restore that backup into this DB.
+
+
+Solution:
+
 CREATE DATABASE database1;
 sudo mysqldump -u root database1 > database1.sql
 DROP database1;

@@ -1,3 +1,7 @@
+Question: https://vinsol.slack.com/files/U03PSB9F6/F783297UK/twitter_mysql_evaluation_exercise
+
+
+
 QUES: Find all users with all their followings.
 ANS: SELECT user1.name AS name, user2.name AS following 
      FROM users AS user1 

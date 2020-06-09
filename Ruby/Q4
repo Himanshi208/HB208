@@ -1,0 +1,105 @@
+Question:
+Define a class Account with three three attributes "name","account_no" & "balance". Name and Balance should be set when creating an object of Account class, account_number should be auto increment. This Account class must have two methods, deposit() and withdraw().
+
+Your program should take three arguments
+1. customer one
+2. customer two
+3. transaction amount
+
+Input Format:
+customer_name1:account_balance1 customer_name2:account_balance2 transfer:transaction_amount
+
+MyBin tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+Rahul:2000 Abhishek:3000 transfer:200
+[/input]
+[output]
+Account number: 1
+Account holder name: Rahul
+Account balance: 1800
+
+Account number: 2
+Account holder name: Abhishek
+Account balance: 3200 
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+"Shivam Goel":12500 "Jatin Kapoor":1000 transfer:12000
+[/input]
+[output]
+Account number: 1
+Account holder name: Shivam Goel
+Account balance: 500
+
+Account number: 2
+Account holder name: Jatin Kapoor
+Account balance: 13000 
+[/output]
+
+Solution:
+
+class DebitError < StandardError
+  def initialize(msg = 'Not enough balance')
+    super
+  end
+end
+
+class Account
+  @@id = 0
+  attr_reader :name, :balance
+  def initialize(name, balance)
+    @name = name
+    @balance = balance
+    @@id += 1
+  end
+
+  def debit(amount)
+    raise DebitError if amount > @balance
+    @balance -= amount
+  end
+
+  def credit(amount)
+    @balance += amount
+  end
+
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  begin
+    name1, balance1 = ARGV[0].split(':', 2)
+    name2, balance2 = ARGV[1].split(':', 2)
+    _transfer, amount = ARGV[2].split(':', 2)
+    account1 = Account.new(name1, balance1.to_i)
+    puts "Account number: #{Account.class_variable_get(:@@id)}"
+    puts "Account holder name: #{account1.name}"
+    puts "Account balance: #{account1.debit(amount.to_i)}"
+    print "\n"
+    account2 = Account.new(name2, balance2.to_i)
+    puts "Account number: #{Account.class_variable_get(:@@id)}"
+    puts "Account holder name: #{account2.name}"
+    puts "Account balance: #{account2.credit(amount.to_i)}"
+  rescue DebitError => e
+    puts e.message
+  end
+end

@@ -1,0 +1,79 @@
+Question: Rewrite factorial method using ranges. 
+Your script should take a number from command line and output the result on standard output
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+0
+[/input]
+[output]
+1
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+1
+[/input]
+[output]
+1
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+5
+[/input]
+[output]
+120
+[/output]
+
+===
+
+[name]
+5
+[/name]
+[input]
+10
+[/input]
+[output]
+3628800
+[/output]
+
+Solution:
+
+# Your Ruby code here
+class Integer
+  def factorial
+    if self == 0
+      return 1
+    else
+      return (1..self).reduce(1, :*)
+    end
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  puts ARGV[0].to_i.factorial
+end

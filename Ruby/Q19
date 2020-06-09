@@ -1,0 +1,90 @@
+Question: Add exception handling for negative numbers in factorial program.
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+-5
+[/input]
+[output]
+Negative number entered
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+0
+[/input]
+[output]
+1
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+1
+[/input]
+[output]
+1
+[/output]
+
+===
+
+[name]
+5
+[/name]
+[input]
+5
+[/input]
+[output]
+120
+[/output]
+
+Solution:
+
+# Your Ruby code here
+class NegativeNumberError < StandardError
+  def initialize(msg = 'Negative number entered')
+    super
+  end
+end
+
+class Integer
+  def factorial
+    if self == 0
+      return 1
+    else
+      (1..self).inject(:*)
+    end
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  begin
+    number = ARGV[0].to_i
+    raise NegativeNumberError if number < 0
+    puts number.factorial
+  rescue NegativeNumberError => e
+    puts e.message
+  end
+end

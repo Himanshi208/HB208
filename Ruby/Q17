@@ -1,0 +1,118 @@
+Question: Write a class that provides the functionality to sum multiple time durations. Time durations should be in HH:MM:SS format.
+
+Eg: ("11:23:07","22:53:45","0:23:23","23:45:56") -> "2 days & 10:26:11"
+("11:23:07") -> "11:23:07"
+
+Note:
+* Make use of Time class
+* Read all methods of Time class
+* Validate input duration format using Regular Expression
+
+MyBin tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input 
+[/output]
+
+===
+[name]
+2
+[/name]
+[input]
+"24:01:10" "10:30:50"
+[/input]
+[output]
+"Invalid 24-hour time value"
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+"0:45:34" "0:15:58"
+[/input]
+[output]
+"01:01:32" 
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+"12:45:2" "10:15:58"
+[/input]
+[output]
+"23:01:00" 
+[/output]
+
+===
+
+[name]
+5
+[/name]
+[input]
+"11:23:07" "22:53:45"
+[/input]
+[output]
+"1 day & 10:16:52" 
+[/output]
+
+===
+
+[name]
+6
+[/name]
+[input]
+"12:59:59" "12:1:1"
+[/input]
+[output]
+"1 day & 01:01:00" 
+[/output]
+
+Solution:
+
+# Your Ruby code here
+class TimeError < StandardError
+  def initialize(msg = "\"Invalid 24-hour time value\"")
+    super
+  end
+end
+
+class Time
+  def self.valid?(time)
+    raise TimeError if time[0..1].to_i >= 24
+  end
+
+  def add(time2)
+    sum_hour = hour + time2.hour
+    new_time = (self + time2.hour * 60 * 60 + time2.min * 60 + time2.sec).strftime('%H:%M:%S')
+    if sum_hour >= 24
+      "#{sum_hour / 24} day & #{new_time}"
+    else
+      new_time
+    end
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  begin
+    Time.valid?(ARGV[0])
+    Time.valid?(ARGV[1])
+    require 'time'
+    time1 =  Time.parse(ARGV[0])
+    time2 =  Time.parse(ARGV[1])
+    puts "\"#{time1.add(time2)}\""
+  rescue TimeError => e
+    puts e.message
+  end
+end

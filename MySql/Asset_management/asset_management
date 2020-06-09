@@ -1,3 +1,63 @@
+Question: We have to design VinSol's asset management system
+
+There should be information about all the employees, there should be information about all the assets the company owns - like Laptops, iPhone, iPads, mouse, printers, routers and modems etc. Most of the assets have information like year, model, make, price, warranty etc.
+
+Some of the assets can be alloted to employees, whereas some like printers and network devices (routers, modems etc) are just kept at common areas for public use. We have to store this information in the database about which stuff is assigned to whom. In case of devices that cannot be alloted, we need to store their location.
+Also, please bear in mind that some asset might have been assigned to somebody else before the person that it’s currently assigne to. We want to track that information as well.
+
+And there are assets which can be assigned, but are not assigned yet and are lying in the almirah with hr - we should be able to track this information as well.
+
+Each time an asset is sent to repair, the asset manager should be able to enter information about the repair, including cost, nature of repair or defect and warranty if any.
+
+Please design a database to hold this information.
+
+Please show the design on paper first, and then create it in mysql
+
+After creating the database, please insert the data related to this as follows
+
+All Laptops, iPhone, printers, projectors come with a default warrany of 1 year from the date of purchase.
+There are Five employees Alice, Bob, Chris, Duke and Emily.
+
+“Laptop A” which was bought and assigned to “Alice” from 1Jan 2011 to 31st December 2011, and is now assigned to Bob from 1st January 2012.
+
+“Laptop B” was bought assigned to “Bob” from 1st Jan 2011 to 31st December 2011, but it not not assigned to anyone and lying in the Asset Manager’s cupboard.
+
+“Laptop N1” and “Laptop N2” are new laptops lying in the Asset Manager’s cupboard and have never been assigned to anyone.
+
+“iPhone A” has been assigned to Alice from April 2011 till date
+
+“iPhone B” has been assigned to Bob from January 2011 till date.
+
+“Projector A” and “Printer A” were bought on 15th August 2011 and are located in the meeting room.
+
+“Printer B” was bought on 10th September 2011, but is lying unused in the Asset Manager’s cupboard.
+
+Write queries to do the following
+
+Find the name of the employee who has been alloted the maximum number of assets till date
+
+Identify the name of the employee who currently has the maximum number of assets as of today
+
+Find name and period of all the employees who have used a Laptop - let’s say laptop A - since it was bought by the company.
+
+Find the list of assets that are currently not assigned to anyone hence lying with the asset manage ( HR)
+
+An employee say Bob is leaving the company, write a query to get the list of assets he should be returning to the company.
+
+Write a query to find assets which are out of warranty
+
+Return a list of Employee Names who do not have any asset assigned to them.
+
+
+
+
+
+
+
+
+Solution: 
+
+
 1. SELECT employees.name 
    FROM employees 
    JOIN personal_assigned_assets 

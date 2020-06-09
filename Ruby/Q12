@@ -1,0 +1,86 @@
+Question: Write a method that returns the no of various lowercase, uppercase, digits and special characters used in the string. Make use of Ranges.
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+"heLLo Every1"
+[/input]
+[output]
+Lowercase characters = 7
+Uppercase characters = 3
+Numeric characters = 1
+Special characters = 1
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+"g@@d MORNING"
+[/input]
+[output]
+Lowercase characters = 2
+Uppercase characters = 7
+Numeric characters = 0
+Special characters = 3
+[/output]
+
+===
+[name]
+4
+[/name]
+[input]
+"my PASSw@rd i$ 123"
+[/input]
+[output]
+Lowercase characters = 6
+Uppercase characters = 4
+Numeric characters = 3
+Special characters = 5 
+[/output]
+
+Solution:
+
+# Your Ruby code here
+class String
+  def char_counter
+    hashcount = Hash.new(0)
+    (0...length).each do |i|
+      if self[i] =~ /[a-z]/
+        hashcount['lower_case_count'] += 1
+      elsif self[i] =~ /[A-Z]/
+        hashcount['upper_case_count'] += 1
+      elsif self[i] =~ /[0-9]/
+        hashcount['numeric_count'] += 1
+      else
+        hashcount['special_char_count'] += 1
+      end
+    end
+    hashcount
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  hash = ARGV[0].char_counter
+  puts "Lowercase characters = #{hash['lower_case_count']}"
+  puts "Uppercase characters = #{hash['upper_case_count']}"
+  puts "Numeric characters = #{hash['numeric_count']}"
+  puts "Special characters = #{hash['special_char_count']}"
+end

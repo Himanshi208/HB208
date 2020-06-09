@@ -1,3 +1,27 @@
+Question: We ran a campaign on a website, asking people to submit their email address, their city and phone number.
+
+The data was collected in a csv format - The file is here... https://www.dropbox.com/s/vrply1yr4dakpos/email_subscribers.txt?dl=0
+
+First import this csv data into a mysql datbase.
+
+From the database, we need to find the following information by writing a single sql statement for each
+
+What all cities did people respond from
+
+How many people responded from each city
+
+Which city were the maximum respondents from?
+
+What all email domains did people respond from ?
+
+Which is the most popular email domain among the respondents ?
+
+
+
+
+Solution: 
+
+
 CREATE TABLE email_subscribers(
   email varchar(50),
   phone_no int,

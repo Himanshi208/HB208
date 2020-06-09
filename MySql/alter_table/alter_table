@@ -1,3 +1,18 @@
+Question:
+Create a table named "testing_table" with following fields:
+
+name (string)
+contact_name (string)
+roll_no (string)
+
+Now:
+
+Delete column name, rename contact_name to username. Add two fields first_name, last_name. Also change the type of roll_no to integer
+
+
+Solution:
+
+
 CREATE DATABASE db;
 USE db
 CREATE TABLE testing_table(

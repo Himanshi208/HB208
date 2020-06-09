@@ -1,0 +1,76 @@
+Question: Write a search method that searches for a letter or word in a user input string and highlights the searched element. Also it should display the total no of searches found.
+
+Eg: If user enters string to be searched as "Can you can a can as a canner can can a can?" and word to be searched is 'can' then output should be:
+(Can) you (can) a (can) as a (can)ner (can) (can) a (can)?
+Total Occurences found: 7
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+"Can you can a can as a canner can can a can?" "can"
+[/input]
+[output]
+(Can) you (can) a (can) as a (can)ner (can) (can) a (can)?
+Total occurrences found: 7 
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+"Can you can a can as a canner can can a can?" "can can"
+[/input]
+[output]
+Can you can a can as a canner (can can) a can?
+Total occurrences found: 1 
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+"Good morning everyone" "hello"
+[/input]
+[output]
+Good morning everyone
+Total occurrences found: 0 
+[/output]
+
+Solution:
+
+# Your Ruby code here
+class String
+  def highlight(str)
+    count = 0
+    highlighted_string = gsub(/(?<str>#{str})/i) do |match|
+      count += 1
+      '(' + match + ')'
+    end
+    return highlighted_string, count
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  highlighted_string, count = ARGV[0].highlight(ARGV[1])
+  puts highlighted_string
+  puts "Total occurrences found: #{count}"
+end

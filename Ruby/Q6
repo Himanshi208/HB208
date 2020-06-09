@@ -1,0 +1,59 @@
+Question: Output whether the input string is palindrome.
+
+Add a method palindrome? in String class, so that it can be called as str.palindrome?, this method should return true / false
+
+Input should be passed as a commend line argument.
+* When string is Palindrome, output should be "Input string is a palindrome"
+* When string is not Palindrome, output should be "Input string is not a palindrome"
+* If no argument is passed(or blank string argument). output should be "Please provide an input"
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input 
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+madam
+[/input]
+[output]
+Input string is a palindrome
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+mamMAM
+[/input]
+[output]
+Input string is not a palindrome
+[/output]
+
+Solution:
+class String
+  def is_palindrome?
+    self == reverse
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  if ARGV[0].is_palindrome?
+    puts 'Input string is a palindrome'
+  else
+    puts 'Input string is not a palindrome'
+  end
+end

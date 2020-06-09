@@ -1,0 +1,13 @@
+Question: Please design the VTApp database
+
+There are Users. One user can be a track owner of a track and at the same time be a reviewer of a track and be a runner on some other track ( Runners are people learning the track, like you are learning this track). Some users can be Admin as well.
+
+Admins can add Track and add user and assign Track owners. Track will have a name like Ruby or Java etc.
+
+Track owners can add Tasks and Exercises to a track. These can be reordered
+
+Runners can be assigned tracks and they mark each task as started and finished
+
+Runners submit solutions for exercises which triggers an email to the Track owner. Track owner assign exercises for review to one of the many possible reviewers for that track. Reviewer can accept or reject the exercise.
+
+

@@ -1,0 +1,101 @@
+Question: Define a class named 'Vehicle' consisting of 'name','price' and methods for initializing and showing contents(overwrite to_s). 
+The 'price' of Vehicle may change over time. 
+Now create a subclass 'Bike' having 'dealer' and percent_price_increase and method to show its content. Initialize a Bike class object with certain values. Define a method price_increase which will increase the price.
+
+Your program should accept command line input in this format: BikeName Price Dealer PercentPriceIncrease. Ex: BajajDiscover 58000 BaggaLink 12
+
+output should be like:
+
+Bike Name: BajajDiscover 
+Bike Price: 58000 
+Bike Dealer: BaggaLink
+
+After 12.0 percent hike in price: 
+Bike Name: BajajDiscover 
+Bike Price: 64960.0 
+Bike Dealer: BaggaLink
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input 
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+"Hero Honda" 65000 "Koncept Automobiles" 25 
+[/input]
+[output]
+Bike Name: Hero Honda
+Bike Price: 65000
+Bike Dealer: Koncept Automobiles
+
+After 25.0 percent hike in price:
+Bike Name: Hero Honda
+Bike Price: 81250.0
+Bike Dealer: Koncept Automobiles 
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+apache 58000 "The Bike showroom" 12.5 
+[/input]
+[output]
+Bike Name: apache
+Bike Price: 58000
+Bike Dealer: The Bike showroom
+
+After 12.5 percent hike in price:
+Bike Name: apache
+Bike Price: 65250.0
+Bike Dealer: The Bike showroom 
+[/output]
+
+Solution:
+class Vehicle
+  attr_accessor :name, :price
+  def initialize(name, price)
+    @name = name
+    @price = price
+  end
+end
+class Bike < Vehicle
+  attr_accessor :dealer, :percent_price_increase
+  def initialize(name, price, dealer)
+    super(name, price)
+    @dealer = dealer
+  end
+  
+  def to_s
+    "Bike Name: #{name}\nBike Price: #{price}\nBike Dealer: #{dealer}\n"
+  end
+  
+  def price_increase(hike=10.0)
+    self.percent_price_increase = hike
+    self.price *= (1 + hike / 100.00)
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  bike = Bike.new(ARGV[0], ARGV[1].to_i, ARGV[2])
+  puts bike.to_s
+  print "\n"
+  if !ARGV[3].nil?
+    bike.price = bike.price_increase(ARGV[3].to_f)
+  end
+  puts "After #{bike.percent_price_increase.to_f} percent hike in price:"
+  puts bike.to_s
+end

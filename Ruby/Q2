@@ -1,0 +1,61 @@
+Question: Ask user to enter text. Replace each vowel in the text with a '*' using regular expression. Your program should accept a string as an argument and output the replaced string
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input 
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+password123 
+[/input]
+[output]
+p*ssw*rd123 
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+"good morning"
+[/input]
+[output]
+g**d m*rn*ng 
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+"hello everyone"
+[/input]
+[output]
+h*ll* *v*ry*n* 
+[/output]
+
+Solution:
+
+class String
+  def substitute_vowels
+    gsub(/[aeiou]/i, '*')
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  puts ARGV[0].substitute_vowels
+end

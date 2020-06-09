@@ -1,0 +1,36 @@
+Question 1: Product Display.
+
+We have product data in csv format and images as follows
+Given the csv file and images at this url - https://www.dropbox.com/s/zp58cpszzeh8aqi/product_data.tar.gz?dl=0
+
+Here is the JSON for the same data.. https://www.dropbox.com/s/pr4l60en921l6fh/product.json?dl=0
+
+Create a page which loads this json data and renders a store front. All the products should be displayed by default. Show a list of Brands in the left. Upon clicking the checkbox in front of a brand, only that particular brand products should be show, hide all others. If no checkbox is selected show products belonging to all brands
+
+Similarly have a filter for color
+
+Also create a toggle for All producs and available products - if user clicks “Available Products” show only products that are not sold out.
+
+The filters should work together - so I should be able to see Only Yellow products of Brand C which are Available.
+
+
+
+
+Question 2: In the filters on left, add a new option 'Pagination'.
+'Pagination' should be a drop down with values '3', '6' and '9'.
+Initially, the page is displayed and pagination is done by picking the first value of the select option.
+The number of pages should be displayed below all the products.
+Also, I can navigate to any page by clicking the respective page number. The clicked page number should be highlighted as well.
+As soon as I select a filter, I should be moved to the 1st page (because of uncertainty of the number of pages it can contain)
+Pagination should work fine with the selected filters.
+
+
+Question 3: Like Pagination, add a new option 'Sorting'.
+'Sorting' should be a drop down with values 'Sort by Name', 'Sort by Color', 'Sort by Availability' and 'Sort by Brand'.
+This should work fine with all the selected filters and pagination value.
+
+
+Question 4: Add all the selected filters in the url (all the filters on the left followed by page number)
+Using the url I should get the same set of result when opened in a new tab. Also, the selected options should be in selected state.
+Instructions: don't use any plugin.
+

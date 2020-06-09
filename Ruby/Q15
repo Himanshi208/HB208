@@ -1,0 +1,81 @@
+Question: Define a method to find all prime numbers upto n using 'step' function.
+
+Don't use Prime class
+
+Mybin tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input 
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+1
+[/input]
+[output]
+[]
+[/output]
+
+===
+[name]
+3
+[/name]
+[input]
+2
+[/input]
+[output]
+[2]
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+20
+[/input]
+[output]
+[2, 3, 5, 7, 11, 13, 17, 19] 
+[/output]
+
+===
+
+[name]
+5
+[/name]
+[input]
+100
+[/input]
+[output]
+[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97] 
+[/output]
+
+Solution:
+
+# Your Ruby code here
+class Integer
+  def prime_numbers
+    prime_number_array = (1..self).to_a
+    prime_number_array.delete(1)
+    prime_number_array.each do |num|
+      break if num * num > self
+      (num * num).step(self, num) { |multiple| prime_number_array.delete(multiple) }
+    end
+    prime_number_array
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  p ARGV[0].to_i.prime_numbers
+end

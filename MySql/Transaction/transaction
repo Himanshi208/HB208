@@ -1,3 +1,27 @@
+Question: consider the following schema:
+create database bank
+
+tables:
+users(id, name, email, account_no)
+accounts(id, account_no, balance)
+
+Queries:
+Insert some raw data and do the following queries using mysql transaction statement:
+i) userA is depositing 1000 Rs. his account
+
+ii) userA is withdrawing 500 Rs.
+
+iii) userA is transferring 200 Rs to userB's account
+
+
+
+
+
+
+
+
+Solution:
+
 1. UPDATE accounts 
    JOIN users 
    ON users.account_no=accounts.account_no 

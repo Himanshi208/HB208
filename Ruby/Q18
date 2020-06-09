@@ -1,0 +1,81 @@
+Question: Create a class Interest that gives the user the difference in amount calculated simply and compoundedly. Initialise class with a block. 'p' and 't' are entered by user. Take 'r' = 10% pa.
+
+MyBin Tests:
+
+[name]
+1
+[/name]
+[input]
+[/input]
+[output]
+Please provide an input 
+[/output]
+
+===
+
+[name]
+2
+[/name]
+[input]
+10000 1
+[/input]
+[output]
+Interest difference= 0.00 
+[/output]
+
+===
+
+[name]
+3
+[/name]
+[input]
+10000 2
+[/input]
+[output]
+Interest difference= 100.00 
+[/output]
+
+===
+
+[name]
+4
+[/name]
+[input]
+15000 2.5
+[/input]
+[output]
+Interest difference= 285.88 
+[/output]
+
+Solution:
+
+# Your Ruby code here
+class Interest
+  attr_accessor :principle, :time
+  def initialize(principle, time)
+    @principle = principle
+    @time = time
+  end
+  def interest_difference
+    rate = yield if block_given?
+    rate = 10 if rate.nil?
+    compound_interest(rate) - simple_interest(rate)
+  end
+
+  private
+  
+  def simple_interest(rate)
+    (principle * time * rate) / 100
+  end
+
+  def compound_interest(rate)
+    (principle * ((1 + rate.to_f / 100.0)**time)) - principle
+  end
+end
+if ARGV[0].nil?
+  puts 'Please provide an input'
+else
+  interest = Interest.new(ARGV[0].to_f, ARGV[1].to_f)
+  result = interest.interest_difference { 10 }
+  puts 'Interest difference= %0.2f' % [result]
+end

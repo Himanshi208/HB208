@@ -1,0 +1,88 @@
+Question: Sales Tax Problem: You have to write a program in Ruby which would calculate the sales tax on the items according to the following conditions:
+
+a. Flat 10 % sales tax is applicable on all items except for book, food and medicine
+b. Additional Import Duty of 5 % is applicable on all imported items without any exceptions
+
+The input to the program would be in the following format..
+
+Name of the product: Chocolates
+Imported?: yes
+Exempted from sales tax? yes
+Price: 120
+Do you want to add more items to your list(y/n): y
+
+Name of the product: Potato Chips
+Imported?: no
+Exempted from sales tax?: yes
+Price: 100
+Do you want to add more items to your list(y/n): y
+
+Name of the product: Perfume
+Imported?: yes
+Exempted from sales tax? no
+Price: 150
+Do you want to add more items to your list(y/n): n
+
+You have to generate a list that would display the list in a nice format and the grand total should be rounded to the nearest integer.
+
+Solution:
+
+# Your Ruby code here
+class Product
+  @@hash1 = {}
+  @@total_cost = 0
+  attr_accessor :product_name, :imported, :exempted, :price
+  def initialize(product_name, imported, exempted, price)
+    @product_name = product_name
+    @imported = imported
+    @exempted = exempted
+    @price = price
+  end
+
+  def tax_applied
+    tax = 0
+    if @exempted == 'no'
+      tax = @price * 10.0 / 100.0
+      @price += tax
+    end
+    if @imported == 'yes'
+      tax = @price * 5.0 / 100.0
+    end
+    tax
+  end
+end
+class Cart < Product
+  def initialize(product_name, imported, exempted, price)
+    super(product_name, imported, exempted, price)
+  end
+
+  def cart_price(tax)
+    @@hash1["Sales tax on #{@product_name}"] = tax
+    if @price
+      @@total_cost += (@price + tax)
+    end
+    return @@hash1, @@total_cost
+  end
+end
+hash1 = {}
+cost = 0
+loop do
+  puts 'Name of the product:'
+  product_name = gets.chomp
+  puts 'Imported?:'
+  imported = gets.chomp
+  puts 'Exempted from sales tax?'
+  exempted = gets.chomp
+  puts 'Price: '
+  price = gets.to_f
+  puts 'Do you want to add more items to your list(y/n):'
+  more = gets.chomp
+  product_new = Product.new(product_name, imported, exempted, price)
+  cart_add = Cart.new(product_name, imported, exempted, price)
+  hash1, cost = cart_add.cart_price(product_new.tax_applied)
+  if more != 'y'
+    break
+  end
+end
+puts(hash1.map { |k, v| "#{k} => #{v}" })
+puts "Total cost is: #{cost}"
